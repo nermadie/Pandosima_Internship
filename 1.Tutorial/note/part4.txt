@@ -1,0 +1,22 @@
+==== Write a minimal form
+    -> detail.html
+        -> <form action="{% url 'polls:vote' question.id %}" method="post">
+        -> csrf_token
+        -> forloop.counter
+    -> views.py
+        -> get params: request.POST["choice"]
+        -> selected_choice.votes = F("votes") + 1 to optimize
+        -> selected_choice.save()
+        -> HttpResponseRedirect prevent user resubmit form if F5
+    -> results.html
+        -> |pluralize to add "s" or "es" ...
+==== Use generic views: Less code is better
+    -> ListView
+        -> model = MyModel                   # Model được sử dụng
+        -> template_name = 'myapp/mymodel_list.html'  # Template để render
+        -> context_object_name = 'objects'   # Tên của danh sách trong context (mặc định là 'object_list')
+        -> paginate_by = 10                  # Số lượng đối tượng trên mỗi trang (tùy chọn)
+    -> DetailView
+        -> model = MyModel                    # Model được sử dụng
+        -> template_name = 'myapp/mymodel_detail.html'  # Template để render
+        -> context_object_name = 'object'     # Tên của đối tượng trong context (mặc định là 'object')

@@ -1,0 +1,25 @@
+==== Writing more views
+    -> polls/views.py
+    -> Add new views into polls/urls.py
+
+==== Write views that actually do something
+    -> Question.objects to select question table
+    -> Create templates folder to create views
+        -> Create subfolder name == <app_name> to let Django understand that is <app_name>'s templates
+    -> return HttpResponse(template.render(context, request))
+    or return render(request, "polls/index.html", context) # Shortcut
+
+==== Raising a 404 error
+    -> try except where select objects
+    -> raise Http404("")
+    or get_object_or_404(Question, pk=question_id)
+
+    ***There’s also a get_list_or_404() function, which works just as get_object_or_404() – except using filter() instead of get(). It raises Http404 if the list is empty.
+
+==== Removing hardcoded URLs in templates
+    -> href="{% url '<name_path>' question.id %}"
+    *** Thêm các params khác cách nhau bằng dấu khoảng trắng
+
+==== Namespacing URL names
+    -> urls.py: app_name = "polls"
+    -> templates: {% url 'polls:detail' question.id %}
