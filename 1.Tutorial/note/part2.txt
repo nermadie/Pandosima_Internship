@@ -1,0 +1,21 @@
+==== Database setup
+    -> settings.py
+    $ python manage.py migrate
+
+==== Creating models
+    -> create model in models.py
+
+==== Activating models
+    -> Add app into project INSTALLED_APPS in settings.py
+    -> Make migration for app
+    $ python manage.py makemigrations <app_name>
+    -> Get sql query of the migration
+    $ python manage.py sqlmigrate polls 0001
+    -> Migrate the migration
+    $ python manage.py migrate
+
+==== Introducing the Django Admin
+    -> Creating an admin user
+    $ python manage.py createsuperuser
+    -> Make the poll app modifiable in the admin
+        -> polls/admin.py -> register model
