@@ -14,6 +14,38 @@
     -> Migrate the migration
     $ python manage.py migrate
 
+==== Playing with the API
+    $ python manage.py shell
+    -> Import models
+    -> Get all questions:
+        -> Question.objects.all()
+
+    -> Create question:
+        -> q = Question(...)
+        -> q.save()
+    Hoặc-> Question.objects.create(...)
+
+    -> Filter question
+        -> Question.objects.filter(id=1)
+        -> Question.objects.filter(question_text__startswith="What")
+    ** -> Exception:
+        -> Question.objects.get(pk=1)
+
+    -> Get related object set:
+        -> q = Question.objects.get(pk=1)
+        -> q.choice_set.all()
+            -> <QuerySet []>
+    ** Create a new choice related to current question
+        -> q.choice_set.create(choice_text="Not
+        much", votes=0)
+
+    -> Count:
+        -> q.choice_set.count()
+
+    -> Update question:
+        -> q.question_text = "..."
+        -> q.save()
+
 ==== Introducing the Django Admin
     -> Creating an admin user
     $ python manage.py createsuperuser

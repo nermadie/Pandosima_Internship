@@ -1,0 +1,33 @@
+==== Writing our first test
+    -> We identify a bug
+    -> Create a test to expose the bug
+        -> polls/test.py
+            -> create a class inherit from TestCase
+    -> Running tests
+        ->$ python manage.py test polls
+    -> Fixing the bug
+    -> Add more comprehensive tests
+
+==== Test a view
+    -> Nếu test ở shell thì phải chạy lệnh setup_test_environment() trước để thiết lập môi trường test (Lưu ý: lệnh này không tạo ra testdb mà chỉ dùng dể test cho các test không sử dụng TestCase)
+    -> Mục đích là có thể gọi request từ client
+    -> The Django test client
+    Shell:
+        >>>from django.test import Client
+        >>>client = Client()
+        >>>response = client.get("/") # GET
+            >>>response.status_code #404
+        >>>from django.urls import reverse
+        >>>response = client.get(reverse("polls:index"))
+            >>>response.status_code # 200
+            >>>response.content # ...
+            >>>response.context["lastest_question_list"] # QuerySet
+
+    -> Improving our view
+    -> Testing our new view
+    -> Testing the DetailView
+==== When testing, more is better
+==== Coverage
+    ->$ pip install coverage
+    ->$ coverage run --source='.' manage.py test polls
+    ->$ coverage report
